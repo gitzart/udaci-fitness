@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
 import { getMetricMetaInfo, timeToString } from '../utils/helpers'
 import { Ionicons } from '@expo/vector-icons'
+import { submitEntry, removeEntry } from '../utils/api'
 import UdaciSteppers from './UdaciSteppers'
 import UdaciSlider from './UdaciSlider'
 import DateHeader from './DateHeader'
@@ -49,10 +50,13 @@ export default class AddEntry extends Component {
     const entry = this.state
 
     this.setState({ run: 0, bike: 0, swim: 0, sleep: 0, eat: 0 })
+    submitEntry({ key, entry })
   }
 
   reset = () => {
     const key = timeTOString()
+
+    removeEntry(key)
   }
 
   render () {
