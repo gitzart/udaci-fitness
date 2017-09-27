@@ -12,6 +12,7 @@ import UdaciSteppers from './UdaciSteppers'
 import UdaciSlider from './UdaciSlider'
 import DateHeader from './DateHeader'
 import TextButton from './TextButton'
+import { NavigationActions } from 'react-navigation'
 
 function SubmitBtn ({ onPress }) {
   return (
@@ -69,6 +70,7 @@ class AddEntry extends Component {
     }))
 
     this.setState({ run: 0, bike: 0, swim: 0, sleep: 0, eat: 0 })
+    this.toHome()
     submitEntry({ key, entry })
   }
 
@@ -78,9 +80,15 @@ class AddEntry extends Component {
     this.props.dispatch(addEntry({
       [key]: getDailyReminderValue()
     }))
-
+    this.toHome()
     removeEntry(key)
   }
+
+  toHome = () => (
+    this.props.navigation.dispatch(NavigationActions.back(
+      { key: 'AddEntry' }
+    ))
+  )
 
   render () {
     const metaInfo = getMetricMetaInfo()
