@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {
-  View, Text, ActivityIndicator, TouchableOpacity, StyleSheet, Animated
+  View, Text, ActivityIndicator, TouchableOpacity, StyleSheet, Animated, Platform
 } from 'react-native'
 import { Foundation } from '@expo/vector-icons'
 import { purple, white } from '../utils/colors'
@@ -22,13 +22,11 @@ class Live extends Component {
           return this.setLocation()
         }
 
-        // this.setState({ status })
-        this.setState(() => ({ status }))
+        this.setState({ status })
       })
       .catch(error => {
         console.warn('Error getting Location permission: ', error)
-        // this.setState({ status: 'undetermined' })
-        this.setState(() => ({ status: 'undetermined' }))
+        this.setState({ status: 'undetermined' })
       })
   }
 
@@ -39,8 +37,7 @@ class Live extends Component {
           return this.setLocation()
         }
 
-        // this.setState({ status })
-        this.setState(() => ({ status }))
+        this.setState({ status })
       })
       .catch(error => {
         console.warn('Error asking Location permission: ', error)
@@ -63,16 +60,11 @@ class Live extends Component {
         ]).start()
       }
 
-      // this.setState({
-      //   coords,
-      //   status: 'granted',
-      //   direction: newDirection
-      // })
-      this.setState(() => ({
+      this.setState({
         coords,
         status: 'granted',
         direction: newDirection
-      }))
+      })
     })
   }
 

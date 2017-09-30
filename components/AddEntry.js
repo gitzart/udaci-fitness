@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, StyleSheet, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import {
-  getMetricMetaInfo, timeToString, getDailyReminderValue
+  getMetricMetaInfo, timeToString, getDailyReminderValue, clearLocalNotification, setLocalNotification
 } from '../utils/helpers'
 import { addEntry } from '../actions'
 import { purple, white } from '../utils/colors'
@@ -72,6 +72,9 @@ class AddEntry extends Component {
     this.setState({ run: 0, bike: 0, swim: 0, sleep: 0, eat: 0 })
     this.toHome()
     submitEntry({ key, entry })
+
+    clearLocalNotification()
+      .then(setLocalNotification)
   }
 
   reset = () => {
